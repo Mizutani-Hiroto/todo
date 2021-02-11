@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \Rutorika\Sortable\SortableTrait;
 
-class Goal extends Model
+class Todo extends Model
 {
     
     public function user()
@@ -12,8 +13,8 @@ class Goal extends Model
         return $this->belongsTo('App\User');
     }
     
-    public function todo()
+    public function goal()
     {
-        return $this->belongsTo('App\Todo');
+        return $this->belongsTo('App\Goal');
     }
 }
