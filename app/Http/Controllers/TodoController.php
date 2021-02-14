@@ -14,7 +14,7 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Goal $goal)
     {
         $todos = $goal->todos()->orderBy('done','asc')->orderBy('position','asc')->get();
         

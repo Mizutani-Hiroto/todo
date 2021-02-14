@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route:resource('goals','GoalController')->middleware('auth');
+
+Route::resource('goals.todos','TodoController')->middleware('auth');
+
+Route::post('/goals/{goal}/todos/{todo}/sort','TodoController@sort')->middleware('auth');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
