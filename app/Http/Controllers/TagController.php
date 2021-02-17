@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Tag;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class TagController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $user = Auth::user();
+        $tags = $user->tags;
+        
+        return response()->json($tags);
+    }
+
+    
+    public function store(Request $request)
+    {
+        $tag = new Tag();
+        $tag->title = request('title');
+        $tag->user_id = Auth::id();
+        $tag->save();
+        
+        $user = Auth::user();
+        
+        $tags = $user->tags;
+        
+        return response()->json($tags);
+    }
+
+    
+    public function update(Request $request, Tag $tag)
+    {
+        $tag->title = request('title');
+        $tag->user_id = Auth::id();
+        $tag->save();
+        
+        $user = Auth::user();
+        
+        $tags = $user->tags;
+        
+        return response()->json($tags);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Tag  $tag
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Tag $tag)
+    {
+        $tag->delete();
+        
+        $user = Auth::user();
+        
+        $tags = $user->tags;
+        
+        return response()->json($tags);
+    }
+}
